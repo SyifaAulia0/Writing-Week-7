@@ -53,9 +53,89 @@
 4. panggil useReducer di dalam function counterprovider
 5. buat action untuk mengubah state 
 6. buat const increment, decrement
+```jsx
+//Counter1Provider.jsx
+import React, { createContext, useReducer, useState } from "react";
 
+export const CounterContext = createContext();
 
+function Counte1Provider({ children }) {
+  const [count, setCount] = useState(0)
 
+  return (
+    <CounterContext.Provider value={{ count, setCount }}>
+      {children}
+    </CounterContext.Provider>
+  );
+}
+
+export default Counte1Provider;
+
+//Counter2Provider.jsx
+import React, { createContext, useReducer, useState } from "react";
+
+export const CounterContext = createContext();
+
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+
+const initialState = {
+  count: 0,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case INCREMENT:
+      return { count: state.count + 1 };
+    case DECREMENT:
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+function Counter2Provider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const increment = () => {
+    dispatch({ type: INCREMENT });
+  };
+
+  const decrement = () => {
+    dispatch({ type: DECREMENT });
+  };
+
+  return (
+    <CounterContext.Provider value={{ state, increment, decrement }}>
+      {children}
+    </CounterContext.Provider>
+  );
+}
+
+export default Counter2Provider;
+
+```
+```jsx
+//main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import Counter2Provider from "./context/Counter2Provider";
+import Counter1Provider from "./context/Counter1Provider";
+import TodoProvider from "./context/TodoProvider";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <React.StrictMode>
+  <TodoProvider>
+    <Counter2Provider>
+      <Counter1Provider>
+        <App />
+      </Counter1Provider>
+    </Counter2Provider>
+  </TodoProvider>
+  // </React.StrictMode>
+);
+```
 ## React Testing
 react teating
 
