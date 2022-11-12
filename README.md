@@ -137,42 +137,32 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 ```
 ## React Testing
-react teating
+- type testing :
+1. manual testing : ngecek sendiri/manual dengan console.log
+2. 2. automayion : kode testing
+- ada 3 tingaktan dalam react testing, berikut adalah urutan dari yang terbawah sampai terataas :
+1. unit test : menguji kode yang paling kecil
+2. integration : melakukan pengujian jika terhubung ke apk lain, c/o database
+3. end to end : secara sisi user
+- semakin ke atas biayanya semakin mahal, yang dibutuhkan juga semakin banyak
 
-manual testing : necek sendiri/manual
-unit test : mnguji kode yang paling kecil
-integration : melakukan pengujian jika terhubung ke apk lain, c/o database
-end to end : secara ssi user
+- jest : library js untuk melakukan test
+- rtl : react testing lib, sudah include jest
+- ada 2 cara testing :
+1. buat fitur lalu testing
+2. testing dahulu, kemudian buat fitur
+### TDD
+- TDD : testing dahulu, kemudian buat fitur
+- TDD circle of life : test fails(membuat ekspektasi), test passes(membuat kode), refact (memperbagus kode)
+- buat kode testing lama, apk harus jelas, spesifikasi harus jelas apa yang mau dibuat
+- cara melakukan testing dengan react, dan metode TDD : 
+1. install jest
+2. buat file app
+3. bikin ekspektasi di app
+4. buat kode test
+5. export di app.js
+6. dijalanin : npm run test
+- coverage : seberapa persen codingan kita masuk kedala testing
+- rtl fungsinya untuk membantu testing sebuah ui dari sudut pandang user
 
-jest : lib js untuk melakukan test
-rtl : react testing lib, sudah include jest
 
-ada 2 cara
-TDD
-test faills
-test passes
-refact: memperbagus kode
-
-buat kode testing lama, apk harus jelas, speksi harus jelas
-
-pake app node versi 16
-install jest
-buat file app
-bikin ekspektasi di app
-buat kode test
-export sum di app.js
-dijalanin : npm run test
-
-coverage : seberapa persen codingan kita masuk kedala testing
-
-rtl
-ngebantu testing sebuah ui dari sudut pandang user
-
-ngerender comp
-ambil component pakai screen.getbytext
-learn reactada di app.js
-ekpektasi : link element ada didlm documment
-npm run test
-
-pola di rtl
-buat pola test  block
