@@ -2,34 +2,59 @@
 ## React Context
 - React context bukan state management
 - react context seperti redux, menyelesaikan masalah props drilling, tetapi react context membuat sebuah data yang bersifat global 
-cara buatnya :
-buat conteksnya, import react create context
-bungkus app dengan parent provider
-panggil nama context (keranjangcountcontext) pakai usecontext
+- cara buat react context :
+  1. buat conteksnya, import react create context
+  2. bungkus app dengan parent provider
+  3. panggil nama context (keranjangcountcontext) pakai usecontext
+  4. counter akan dipangil react-context
+  5. counterprovider buat const countercontext = createcontext
+  6. context nya ditaruh di countercontext.provider
+  7. provider akan menerima children
+  ```jsx
+  import React, { createContext, useState } from 'react'
 
-counter akan dipangiil react-context
-counterprovider buat const countercontext = createcontext
-context nya ditaruh di countercontext.provider
-provider akan menerima children, dipanggil di countercontext.provider
-counterprovider sebagai pembungkus app di main.jsx
-- ada 2 cara
-  1. oper data ke dalam component home
-  2. oper component ke dalam component (children, parent) app dibungkus dengan keranjangCountProvider
+  export const KeranjangCountContext = createContext()
+
+  function KeranjangCountProvider({children}) {
+  const [keranjangCount, setKeranjangCount] = useState(0)
+
+  return (
+    <KeranjangCountContext.Provider value={{keranjangCount, setKeranjangCount}}>
+      {children}
+    </KeranjangCountContext.Provider>
+  )
+  }
+
+  export default KeranjangCountProvider
+  ```
+  8. counterprovider sebagai pembungkus app di main.jsx
+  ```jsx
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import App from "./App";
+  import KeranjangCountProvider from "./KeranjangCountProvider";
+  import UserProvider from "./UserProvider";
+
+  ReactDOM.createRoot(document.getElementById("root")).render(
+  // <React.StrictMode>
+  <UserProvider>
+    <KeranjangCountProvider>
+      <App />
+    </KeranjangCountProvider>
+  </UserProvider>
+  // </React.StrictMode>
+  );
+  ```
+### useReducer
+- context biasa untuk menglobalkan datanya, dengan bantuan reducer datanya bisa di manage
+1. import useReducer
+2. buat function reducer(state, action)
+3. buat switch case 
+4. panggil useReducer di dalam function counterprovider
+5. buat action untuk mengubah state 
+6. buat const increment, decrement
 
 
-
-
-useReducer
-import useReducer
-buat function reducer(state, action)
-buat switch case 
-panggil useReducer di dalam function counterprovider
-buat action untuk mengubah state
-increment, decrement
-buat const increment, decrement
-
-context biasa untuk menglobalkan datanya
-dengan bantuan reducer, datanya bisa di manage
 
 ## React Testing
 react teating
